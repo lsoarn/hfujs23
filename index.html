@@ -5,12 +5,51 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Javascript</title>
+    <title>Arns Javascript</title>
     <script>
-        n =1;
-        m = 2;
-        number = n + m;
-        console.log(number)
+
+
+// Beispiel mit Nullish  Operator
+       let defaultValue = "Wert";
+
+let userInput = null;
+
+let result = userInput ?? defaultValue;
+
+console.log(result);
+
+
+// Beispiel mit Spread Operator
+
+let nummer = [1, 2, 3];
+let nummer2 = [4, 5, 6];
+
+let beideNummern = [...nummer, ...nummer2];
+
+console.log(beideNummern);
+
+
+//Destructoring farben
+
+let farben = ["rot", "grün", "blau"];
+let [farbe1, farbe2, farbe3] = farben;
+
+console.log(farbe1);
+console.log(farbe2);    
+console.log(farbe3);
+
+
+
+//Destructoring Person
+
+let person = {name: "Max", alter: 30, adresse: { strasse: "Musterstrasse 1", hobby: "Fussball"} };
+let { name, alter, adresse, hobby} = person;
+
+console.log(name);
+console.log(alter);
+console.log(adresse);
+console.log(hobby);
+
     </script>
 
 </head>
