@@ -1,17 +1,27 @@
 export class Person {
-  constructor(firstName, lastName) {
+  constructor(firstName, middleName, lastName, birthDate) {
     this.firstName = firstName ?? "John";
+    this.middleName = middleName ?? "Q.";
     this.lastName = lastName ?? "Doe";
+    this.birthDate = birthDate ?? new Date(1990, 1, 1);
   }
 
   fullName() {
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.firstName} ${this.middleName} ${this.lastName}`;
+  }
+
+  age() {
+    return new Date().getFullYear() - this.birthDate.getFullYear();
+  }
+
+  toString() {
+    return this.fullName();
   }
 }
 
 export class Teacher extends Person {
-  constructor(firstName, lastName, schoolName) {
-    super(firstName, lastName);
+  constructor(firstName, middleName, lastName, birthDate, schoolName) {
+    super(firstName, middleName, lastName, birthDate);
     this.schoolName = schoolName ?? "unknown";
   }
 
@@ -36,7 +46,7 @@ export function getCapitalized(test) {
 }
 
 export function getOddCapitalized(test) {
-  return test.map(t => t.toUpperCase());
+  return test.map((t, i) => (i % 2 === 1 ? t.toUpperCase() : t));
 }
 
 export const getFibonacci = n => {
@@ -54,29 +64,36 @@ export const getFibonacci = n => {
 export function* getFibonacciSequence() {
   let a = 0, b = 1;
   while (true) {
+  // Sehr schön! Eine sehr kompakte und nicht rekursive Lösung.
+  // Man hätte auch getFibonacci() oben aufrufen können.
+
     yield a;
     [a, b] = [b, a + b];
   }
 }
 
 export function getCopyOfArray(a) {
+  // Geht auch mit dem Spread-Operator
+  // [...a]
   return a.slice();
 }
 
 export function getJsonWithNiceFormattingAndNoNumbers(obj) {
-  return JSON.stringify(obj, (k, v) => {
-    return v;
-  });
+  return JSON.stringify(
+    obj,
+    (k, v) => {
+      return typeof v === "number" ? undefined : v;
+    },
+    2,
+  );
 }
 
 export function getPropertyNames(obj) {
   return Object.keys(obj);
 }
 
-export function* getPropertyValues(obj) {
-  for (const objKey in obj) {
-    yield obj[objKey];
-  }
+export function getPropertyValues(obj) {
+  return Object.values(obj);
 }
 
 export function divide(numerator, denominator) {
@@ -104,9 +121,13 @@ export function safeDivide(numerator, denominator) {
 }
 
 export function getObjectWithAOnly(obj) {
-  return obj;
+  const { a, rest } = obj;
+
+  return { a };
 }
 
 export function getObjectWithAllButA(obj) {
-  return obj;
+  const { a, ...rest } = obj;
+
+  return rest;
 }
